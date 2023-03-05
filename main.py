@@ -1,6 +1,8 @@
 from Config import *
 from Snake import Snake
 from Utilities import *
+from Fruit import Fruit
+from Fruit_Manager import FruitManager
 
 pygame.init()
 pygame.display.set_caption("Snek")
@@ -12,6 +14,10 @@ clock = pygame.time.Clock()
 
 snake_surface = pygame.Surface([SNAKE_SURFACE_SIZE, SNAKE_SURFACE_SIZE])
 snake = Snake(snake_surface)
+
+fruit_manager = FruitManager(snake_surface)
+
+
 while True:
     screen.fill(COLORS["Ash Gray"])
     snake_surface.fill(COLORS["Honeydew"])
@@ -25,11 +31,21 @@ while True:
             if event.key == K_ESCAPE:
                 pygame.quit()
                 sys.exit()
+            if event.key == K_q:
+                print(len(fruit_manager.fruit_list), fruit_manager.fruit_list)
+
 
             snake.update_direction(event.key)
 
-    snake.update()
+    fruit_manager.update()
+
+    snake.update(fruit_manager.fruit_list)
+    fruit_manager.draw()
     snake.draw()
+    # print(len(fruit_list))
+
+
+
 
     draw_grid(snake_surface)  # Draws empty grid lines
 

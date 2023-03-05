@@ -16,12 +16,12 @@ class Snake:
 
         self.can_loop = True
 
-    def update(self):
+    def update(self, fruit_list):
         self.delta_time = self.time_since_moved - time.time()
 
         if -self.delta_time >= (self.move_delay / 1000):
             self.time_since_moved = time.time()
-            self.move()
+            self.move(fruit_list)
 
     def draw(self):
         pygame.draw.rect(self.display_surface, self.color, self.rect)
@@ -44,7 +44,7 @@ class Snake:
             if self.direction != 1:
                 self.direction = 3
 
-    def move(self):
+    def move(self, fruit_list):
         if self.direction == 0:
             self.rect.y -= self.rect.width
 
@@ -57,9 +57,9 @@ class Snake:
         if self.direction == 3:
             self.rect.x -= self.rect.width
 
-        self.check_collision()
+        self.check_collision(fruit_list)
 
-    def check_collision(self):
+    def check_collision(self, fruit_list):
         def border_checks():
             if self.rect.x >= SNAKE_SURFACE_SIZE:
                 if DEBUG_MODE: print("Max X Border")
@@ -75,7 +75,15 @@ class Snake:
                 if DEBUG_MODE: print("Min Y Border")
                 return "min_y"
 
+        def fruit_checks():
+            if self.rect.collidelist(fruit_list) != -1:
+                collision_fruit = fruit_list[self.rect.collidelist(fruit_list)]
+
+                print(f"Snake Collided with fruit: {collision_fruit}")
+                collision_fruit.alive = False
+
         collision = border_checks()
+        fruit_checks()
 
         match collision:
             case "min_x":
