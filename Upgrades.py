@@ -26,11 +26,11 @@ class SnakeSpeedUpgrade(UpgradeTemplate):
         self.cost = self.level ** 0.5
 
 
-
 class UpgradeManager:
     def __init__(self, game_screen):
         self.game_screen = game_screen
 
+        self.scroll_offset = 0
         self.available_upgrade_list = list()
         self.available_upgrade_list.append(SnakeSpeedUpgrade(game_screen))
 
@@ -40,7 +40,7 @@ class UpgradeManager:
 
     def update(self):
         for i, upgrade in enumerate(self.available_upgrade_list):
-            upgrade.y = i * (upgrade.y_size + UPGRADE_Y_PAD)
+            upgrade.y = i * (upgrade.y_size + UPGRADE_Y_PAD) + self.scroll_offset
 
         self.draw()
 

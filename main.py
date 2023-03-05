@@ -28,6 +28,9 @@ while True:
             pygame.quit()
             sys.exit()
 
+        if event.type == pygame.MOUSEWHEEL:
+            upgrade_manager.scroll_offset -= int(event.y) * 10
+            
         if event.type == KEYDOWN:
             if event.key == K_ESCAPE:
                 pygame.quit()
@@ -41,8 +44,8 @@ while True:
                 print(upgrade_manager.available_upgrade_list)
 
                 print("Debugged")
-
             snake.update_direction(event.key)
+
 
     fruit_manager.update()
     snake.update(fruit_manager.fruit_list)
