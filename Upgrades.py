@@ -4,12 +4,12 @@ from Config import *
 class UpgradeTemplate(object):
     def __init__(self, game_screen):
         self.game_screen = game_screen
-        self.size = self.x_size, self.y_size = [(SCREEN_SIZE - SNAKE_SURFACE_SIZE) - 10, (SCREEN_SIZE - SNAKE_SURFACE_SIZE) // 2]
+        self.size = self.x_size, self.y_size = UPGRADE_SIZE
         self.surface = pygame.Surface(self.size)  # Parent Container that will be stamped onto the game screen, contain all sub-menus inside of this one
 
     def draw(self):
         self.surface.fill((255, 255, 255))
-        pygame.Surface.blit(self.surface, self.game_screen, (0, 0))
+        pygame.Surface.blit(self.game_screen, self.surface, (0, 0))
 
 
 class SnakeSpeedUpgrade(UpgradeTemplate):
