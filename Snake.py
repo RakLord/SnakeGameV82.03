@@ -7,6 +7,9 @@ class Snake:
         self.color = start_color
         self.direction = 1
 
+        self.tail = list()
+        self.tail_max_len = 1
+
         self.display_surface = display_surface
         self.move_delay = 600  # Time in MS before aloud to move again
         self.time_since_moved = time.time()
@@ -18,13 +21,25 @@ class Snake:
 
     def update(self, fruit_list):
         self.delta_time = self.time_since_moved - time.time()
+        self.tail.append(pygame.Rect(self.rect.x, self.rect.y, BLOCK_SIZE, BLOCK_SIZE))
 
         if -self.delta_time >= (self.move_delay / 1000):
             self.time_since_moved = time.time()
             self.move(fruit_list)
 
+        if self.rect in self.tail:
+            self.tail.remove(self.rect)
+        print(len(self.tail), self.tail_max_len)
+
+        if len(self.tail) > self.tail_max_len:
+            self.tail.pop(0)
+
     def draw(self):
         pygame.draw.rect(self.display_surface, self.color, self.rect)
+        for rect in self.tail:
+            pygame.draw.rect(self.display_surface, (100, 100, 100), rect)
+
+
 
     def update_direction(self, key):
 
@@ -59,6 +74,7 @@ class Snake:
 
         self.check_collision(fruit_list)
 
+
     def check_collision(self, fruit_list):
         def border_checks():
             if self.rect.x >= SNAKE_SURFACE_SIZE:
@@ -80,6 +96,7 @@ class Snake:
                 collision_fruit = fruit_list[self.rect.collidelist(fruit_list)]
 
                 print(f"Snake Collided with fruit: {collision_fruit}")
+                self.tail_max_len += 1
                 collision_fruit.alive = False
 
         collision = border_checks()
