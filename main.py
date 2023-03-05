@@ -30,7 +30,7 @@ while True:
 
         if event.type == pygame.MOUSEWHEEL:
             upgrade_manager.scroll_offset -= int(event.y) * 10
-            
+
         if event.type == KEYDOWN:
             if event.key == K_ESCAPE:
                 pygame.quit()
@@ -46,7 +46,6 @@ while True:
                 print("Debugged")
             snake.update_direction(event.key)
 
-
     fruit_manager.update()
     snake.update(fruit_manager.fruit_list)
     upgrade_manager.update()
@@ -55,9 +54,6 @@ while True:
     snake.draw()
 
     # print(len(fruit_list))
-
-
-
 
     draw_grid(snake_surface)  # Draws empty grid lines
 

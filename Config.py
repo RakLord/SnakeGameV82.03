@@ -5,6 +5,12 @@ import numpy as np
 import time
 import random
 
+pygame.font.init()
+font = pygame.font.SysFont(None, 24)
+
+
+
+
 DEBUG_MODE = True
 
 SCREEN_SIZE = 900
@@ -19,3 +25,4 @@ COLORS = {"Dark Purple" :      (22, 12, 40),
 
 UPGRADE_SIZE = [290, 100]
 UPGRADE_Y_PAD = 6
+
