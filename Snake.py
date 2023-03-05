@@ -29,7 +29,6 @@ class Snake:
 
         if self.rect in self.tail:
             self.tail.remove(self.rect)
-        print(len(self.tail), self.tail_max_len)
 
         if len(self.tail) > self.tail_max_len:
             self.tail.pop(0)

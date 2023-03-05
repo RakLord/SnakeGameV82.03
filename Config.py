@@ -17,5 +17,5 @@ COLORS = {"Dark Purple" :      (22, 12, 40),
           "Ash Gray" :         (174, 183, 179),
           "Rich Black" :       (0, 4, 17)}
 
-UPGRADE_SIZE = [290, 150]
-
+UPGRADE_SIZE = [290, 100]
+UPGRADE_Y_PAD = 6

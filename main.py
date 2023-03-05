@@ -46,10 +46,10 @@ while True:
 
     fruit_manager.update()
     snake.update(fruit_manager.fruit_list)
+    upgrade_manager.update()
 
     fruit_manager.draw()
     snake.draw()
-    upgrade_manager.draw()
 
     # print(len(fruit_list))
 
